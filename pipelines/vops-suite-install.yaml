@@ -4,7 +4,7 @@ resources:
 - name: vops-suite-ci-pipeline
   type: git
   source:
-    uri: git@github.com:nvpnathan/vops-suite-ci-pipeline.git
+    uri: https://github.com/nvpnathan/vops-suite-ci-pipeline.git
     branch: ((vops_suite_install_branch))
 
 - name: vmw-cli
