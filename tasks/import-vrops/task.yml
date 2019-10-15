@@ -1,0 +1,41 @@
+---
+
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: dyanngg/nsx-t-gen-worker}
+
+params:
+  VMWUSER:
+  VMWPASS:
+  GOVC_INSECURE:
+  GOVC_CA_CERT:
+  GOVC_URL:
+  GOVC_USERNAME:
+  GOVC_PASSWORD:
+  GOVC_DATACENTER:
+  GOVC_DATASTORE:
+  GOVC_RESOURCE_POOL:
+  VROPS_DEPLOYMENT_SIZE:
+  VROPS_DISK_PROVISION:
+  VROPS_IP_POLICY:
+  VROPS_NAME:
+  VROPS_PORTGROUP:
+  VROPS_GATEWAY:
+  VROPS_DOMAIN_NAME:
+  VROPS_SEARCH_PATH:
+  VROPS_DNS_SERVER:
+  VROPS_IP:
+  VROPS_NETMASK:
+  VROPS_VM_FOLDER:
+  VROPS_POWER_ON:
+  VROPS_INDEX:
+  VROPS_OVA:
+
+inputs:
+  - name: vops-suite-ci-pipeline
+  - name: vrops-ova
+
+run:
+  path: vops-suite-ci-pipeline/tasks/import-vrops/task.sh

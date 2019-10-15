@@ -1,0 +1,43 @@
+---
+
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: dyanngg/nsx-t-gen-worker}
+
+params:
+  VMWUSER:
+  VMWPASS:
+  GOVC_INSECURE:
+  GOVC_CA_CERT:
+  GOVC_URL:
+  GOVC_USERNAME:
+  GOVC_PASSWORD:
+  GOVC_DATACENTER:
+  GOVC_DATASTORE:
+  GOVC_RESOURCE_POOL:
+  VLOG_DEPLOYMENT_SIZE:
+  VLOG_IP_POLICY:
+  VLOG_NAME:
+  VLOG_IP:
+  VLOG_NETMASK:
+  VLOG_GATEWAY:
+  VLOG_DNS_SERVER:
+  VLOG_SEARCH_PATH:
+  VLOG_DOMAIN_NAME:
+  VLOG_PORTGROUP:
+  VLOG_VM_NAME:
+  VLOG_DISK_PROVISION:
+  VLOG_ROOT_PW:
+  VLOG_POWER_ON:
+  VLOG_VM_FOLDER:
+  VLOG_INDEX:
+  VLOG_OVA:
+
+inputs:
+  - name: vops-suite-ci-pipeline
+  - name: vlog-ova
+
+run:
+  path: vops-suite-ci-pipeline/tasks/import-vlog/task.sh

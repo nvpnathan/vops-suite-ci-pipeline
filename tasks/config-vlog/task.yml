@@ -1,0 +1,20 @@
+---
+
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: dyanngg/nsx-t-gen-worker}
+
+params:
+  VLOG_IP:
+  VLOG_USER:
+  VLOG_PASS:
+  VLOG_EMAIL:
+  VLOG_LICENSE:
+
+inputs:
+  - name: vops-suite-ci-pipeline
+
+run:
+  path: vops-suite-ci-pipeline/tasks/config-vlog/task.sh
