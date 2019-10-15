@@ -2,24 +2,18 @@
 
 set -eu
 
-export ROOT_DIR=`pwd`
-export VMWFILESDIR=$ROOT_DIR/vrops-ova/rootfs/
-export PATH=$ROOT_DIR/vrops-ova/rootfs/usr/local/bin:$PATH
-
-vmw-cli index $VROPS_INDEX
-
-if [ -f "$VMWFILESDIR/$VROPS_OVA" ]; then
-    echo "$VROPS_OVA exists"
-    export OVA_ISO_PATH=$VMWFILESDIR
-else 
-    echo "$VROPS_OVA does not exist downloading"
-    vmw-cli get $VROPS_OVA
-    export OVA_ISO_PATH=$VMWFILESDIR
-fi
+export OVA_ISO_PATH='./vrops-ova'
 
 file_path=$(find $OVA_ISO_PATH/ -name "*.ova")
 
 echo "$file_path"
+
+if echo $GOVC_INSECURE == "1"
+  then echo "Insecure vCenter Cert"
+else
+  export GOVC_TLS_CA_CERTS=/tmp/vcenter-ca.pem
+  echo "$GOVC_CA_CERT" > "$GOVC_TLS_CA_CERTS"
+fi
 
 govc import.spec "$file_path" | python -m json.tool > vrops-import.json
 

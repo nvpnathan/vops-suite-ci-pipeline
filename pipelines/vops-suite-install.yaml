@@ -1,18 +1,30 @@
 resource_types:
+- name: file-url
+  type: docker-image
+  source:
+    repository: pivotalservices/concourse-curl-resource
+    tag: latest
 
 resources:
 - name: vops-suite-ci-pipeline
   type: git
   source:
-    uri: git@github.com:nvpnathan/vops-suite-ci-pipeline.git
-    branch: ((vops_suite_install_branch))
-    private_key: ((git_private_key))
+    uri: https://github.com/nvpnathan/vops-suite-ci-pipeline.git
+    branch: master
 
-- name: vmw-cli
-  type: docker-image
+- name: vrops-ova
+  type: file-url
   source:
-    repository: apnex/vmw-cli
-    tag: ubuntu
+    url: ((ova_webserver))/((vrops_ova_file_name))
+    filename: ((vrops_ova_file_name))
+    skip_ssl_verification: true
+
+- name: vlog-ova
+  type: file-url
+  source:
+    url: ((ova_webserver))/((vlog_ova_file_name))
+    filename: ((vlog_ova_file_name))
+    skip_ssl_verification: true
 
 jobs:
 
@@ -21,14 +33,10 @@ jobs:
   - in_parallel:
     - get: vops-suite-ci-pipeline
     - get: vrops-ova
-      resource: vmw-cli
-      params: {globs: ["*.ova"]}
   
   - task: deploy
     file: vops-suite-ci-pipeline/tasks/import-vrops/task.yml
     params:
-      VMWUSER: ((myvmw_user))
-      VMWPASS: ((myvmw_pass))
       GOVC_INSECURE: ((vcenter_insecure))
       GOVC_CA_CERT: ((vcenter_ca_cert))
       GOVC_URL: ((vcenter_host))
@@ -50,22 +58,17 @@ jobs:
       VROPS_NETMASK: ((vrops_netmask))
       #VROPS_VM_FOLDER: ((vrops_vm_folder))
       VROPS_POWER_ON: ((vrops_power_on))
-      VROPS_INDEX: ((vrops_product))
-      VROPS_OVA: ((vrops_ova_file_name))
+      ova_file_name_int: ((vrops_ova_file_name))
 
 - name: deploy-vlog-insight
   plan:
   - in_parallel:
     - get: vops-suite-ci-pipeline
     - get: vlog-ova
-      resource: vmw-cli
-      params: {globs: ["*.ova"]}
   
   - task: deploy
     file: vops-suite-ci-pipeline/tasks/import-vlog/task.yml
     params:
-      VMWUSER: ((myvmw_user))
-      VMWPASS: ((myvmw_pass))
       GOVC_INSECURE: ((vcenter_insecure))
       GOVC_CA_CERT: ((vcenter_ca_cert))
       GOVC_URL: ((vcenter_host))
@@ -89,8 +92,7 @@ jobs:
       VLOG_ROOT_PW: ((vlog_root_pw))
       #VLOG_VM_FOLDER: ((vlog_vm_folder))
       VLOG_POWER_ON: ((vlog_power_on))
-      VLOG_INDEX: ((vlog_product))
-      VLOG_OVA: ((vlog_ova_file_name))
+      ova_file_name_int: ((vlog_ova_file_name))
 
 - name: configure-vlog
   plan:

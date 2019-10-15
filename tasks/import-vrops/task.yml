@@ -7,8 +7,6 @@ image_resource:
   source: {repository: dyanngg/nsx-t-gen-worker}
 
 params:
-  VMWUSER:
-  VMWPASS:
   GOVC_INSECURE:
   GOVC_CA_CERT:
   GOVC_URL:
@@ -30,8 +28,6 @@ params:
   VROPS_NETMASK:
   VROPS_VM_FOLDER:
   VROPS_POWER_ON:
-  VROPS_INDEX:
-  VROPS_OVA:
 
 inputs:
   - name: vops-suite-ci-pipeline

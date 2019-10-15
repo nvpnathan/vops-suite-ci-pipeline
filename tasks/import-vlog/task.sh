@@ -2,20 +2,7 @@
 
 set -eu
 
-export ROOT_DIR=`pwd`
-export VMWFILESDIR=$ROOT_DIR/vlog-ova/rootfs/
-export PATH=$ROOT_DIR/vlog-ova/rootfs/usr/local/bin:$PATH
-
-vmw-cli index $VLOG_INDEX
-
-if [ -f "$VMWFILESDIR/$VLOG_OVA" ]; then
-    echo "$VLOG_OVA exists"
-    export OVA_ISO_PATH=$VMWFILESDIR
-else 
-    echo "$VLOG_OVA does not exist downloading"
-    vmw-cli get $VLOG_OVA
-    export OVA_ISO_PATH=$VMWFILESDIR
-fi
+export OVA_ISO_PATH='./vlog-ova'
 
 file_path=$(find $OVA_ISO_PATH/ -name "*.ova")
 
