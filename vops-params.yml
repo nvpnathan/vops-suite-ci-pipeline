@@ -1,4 +1,4 @@
-vops_suite_install_branch: master # use local_ova to use local nginx server with OVA's locally
+vops_suite_install_branch: vrops-config # use local_ova to use local nginx server with OVA's locally
 
 ## myvmware.com
 myvmw_user: ((myvmware_user))
@@ -6,9 +6,9 @@ myvmw_pass: ((myvmware_pass))
 
 ## webserver | ova filename
 ova_webserver: "http://nginx"
-vrops_product: vmware-vrealize-operations
+vrops_product: vmware-vrealize-operations ## DO NOT MODIFY
 vrops_ova_file_name: "vRealize-Operations-Manager-Appliance-7.5.0.13165949_OVF10.ova"
-vlog_product: vmware-vrealize-log-insight
+vlog_product: vmware-vrealize-log-insight ## DO NOT MODIFY
 vlog_ova_file_name: "VMware-vRealize-Log-Insight-4.8.0-13036238_OVF10.ova"
 
 ## vcenter settings
@@ -35,6 +35,11 @@ vrops_ip_address: 192.168.64.50
 vrops_netmask: 255.255.255.0
 vrops_power_on: true
 #vrops_vm_folder:
+
+## vrops configuration
+vrops_username: admin
+vrops_password: ((vlog_password))
+vrops_ntp: pool.ntp.org
 
 ## vlog-insight ova settings
 vlog_datastore: vlab-nfs-ds-01

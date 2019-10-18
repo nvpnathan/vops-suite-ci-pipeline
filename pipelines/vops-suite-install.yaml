@@ -52,6 +52,22 @@ jobs:
       VROPS_INDEX: ((vrops_product))
       VROPS_OVA: ((vrops_ova_file_name))
 
+- name: configure-vrops
+  plan:
+  - in_parallel:
+    - get: vops-suite-ci-pipeline
+      params: {globs: []}
+      passed: [deploy-vrops]
+      trigger: true
+
+  - task: config-vrops-deployment
+    file: vops-suite-ci-pipeline/tasks/config-vrops/task.yml
+    params:
+        VROPS_IP: ((vrops_ip_address))
+        VROPS_USER: ((vrops_username))
+        VROPS_PASS: ((vrops_password))
+        VROPS_NTP: (vrops_ntp)
+
 - name: deploy-vlog-insight
   plan:
   - in_parallel:

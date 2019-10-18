@@ -1,0 +1,19 @@
+---
+
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: {repository: dyanngg/nsx-t-gen-worker}
+
+params:
+  VROPS_IP:
+  VROPS_USER:
+  VROPS_PASS:
+  VROPS_NTP:
+
+inputs:
+  - name: vops-suite-ci-pipeline
+
+run:
+  path: vops-suite-ci-pipeline/tasks/config-vrops/task.sh
