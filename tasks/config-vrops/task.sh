@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -eu
+
 export ROOT_DIR=`pwd`
 source $ROOT_DIR/vops-suite-ci-pipeline/functions/vrops_functions.bash
 ####################################################
