@@ -107,6 +107,7 @@ removeWizard() {
 	'https://'$VROPS_IP'/suite-api/internal/deployment/config/properties/java_util_HashSet'
 }
 ####################################################
+# Configure vCenter Adapter for Monitoring
 configureVCadapter() {
 	curl -ski -X POST \
 	-H 'Content-Type: application/json;charset=UTF-8' \
@@ -149,7 +150,8 @@ configureVCadapter() {
 		}' \
 	'https://'$VROPS_IP'/suite-api/api/adapters'
 }
-
+####################################################
+# Get vCenter Adapter ID to start it
 getVCadapterID() {
 	curl -ski -X GET \
 	-H 'Content-Type: application/json;charset=UTF-8' \
@@ -158,7 +160,8 @@ getVCadapterID() {
 	'https://'$VROPS_IP'/suite-api/api/adapters?adapterKindKey=VMWARE' \
 	| sed -n 's|.*"id":"\([^"]*\)".*|\1|p'
 }
-
+####################################################
+# Start vCenter Adapter
 startVCadapter() {
 	curl -ski -X PUT \
 	-H 'Content-Type: application/json;charset=UTF-8' \
