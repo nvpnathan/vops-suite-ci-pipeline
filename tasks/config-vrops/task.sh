@@ -23,3 +23,12 @@ configCluster
 ## monitor the cluster status
 waitForClusterFinish
 ####################################################
+VROPS_BEARER_TOKEN=$(getToken)
+echo ""
+echo $VROPS_BEARER_TOKEN
+echo ""
+assignLicense
+echo ""
+echo "License Assigned"
+echo ""
+removeWizard

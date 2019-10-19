@@ -7,7 +7,7 @@ PIPELINE_NAME=install-vops-suite
 CONCOURSE_USER=nsx
 CONCOURSE_PW=vmware
 
-alias fly-s="fly -t $CONCOURSE_TARGET set-pipeline -p $PIPELINE_NAME -c ~/repos/vops-suite-ci-pipeline/pipelines/vops-suite-install.yaml -l vops-params.yaml"
+alias fly-s="fly -t $CONCOURSE_TARGET set-pipeline -p $PIPELINE_NAME -c ~/repos/vops-suite-ci-pipeline/pipelines/vops-suite-install.yaml -l vops-params.yml"
 alias fly-d="fly -t $CONCOURSE_TARGET destroy-pipeline -p $PIPELINE_NAME"
 alias fly-l="fly -t $CONCOURSE_TARGET containers | grep $PIPELINE_NAME"
 alias fly-h="fly -t $CONCOURSE_TARGET hijack -b "

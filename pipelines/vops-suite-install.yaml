@@ -28,6 +28,7 @@ vrops-config-params: &vrops-config-params
   VROPS_USER: ((vrops_username))
   VROPS_PASS: ((vrops_password))
   VROPS_NTP: ((vrops_ntp))
+  VROPS_LICENSE: ((vrops_license_key))
 
 vlog-deploy-params: &vlog-deploy-params
   GOVC_INSECURE: ((vcenter_insecure))

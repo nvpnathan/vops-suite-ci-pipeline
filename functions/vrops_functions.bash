@@ -70,3 +70,39 @@ waitForClusterFinish() {
 	done
 }
 ####################################################
+# Retrieve Bearer Token
+getToken() {
+    curl -ski -X POST \
+    -H 'Content-Type: application/json' \
+    -H 'Accept: application/json' \
+    -d '{"username":"'$VROPS_USER'","authSource":"Local","password":"'$VROPS_PASS'"}' \
+    'https://'$VROPS_IP'/suite-api/api/auth/token/acquire' \
+    | sed -n 's|.*"token":"\([^"]*\)".*|\1|p'
+}
+####################################################
+# Assign License
+assignLicense() {
+	curl -ski -X POST \
+	-H 'Content-Type: application/json;charset=UTF-8' \
+	-H 'Authorization: vRealizeOpsToken '$VROPS_BEARER_TOKEN'' \
+	-d	'{
+		"solutionLicenses" : [ {
+			"id" : null,
+			"licenseKey" : "'$VROPS_LICENSE'",
+			"edition" : null,
+			"others" : [ ],
+			"otherAttributes" : { }
+		} ]
+		}' \
+	'https://'$VROPS_IP'/suite-api/api/deployment/licenses'
+}
+####################################################
+# Remove initial configuration wizard
+removeWizard() {
+	curl -ski -X POST \
+	-H 'Content-Type: application/json;charset=UTF-8' \
+	-H 'Authorization: vRealizeOpsToken '$VROPS_BEARER_TOKEN'' \
+	-H 'X-vRealizeOps-API-use-unsupported: true' \
+	-d	'{"keyValues": [ { "key": "configurationWizardFirstConfigDone", "values": ["true"] } ] }' \
+	'https://'$VROPS_IP'/suite-api/internal/deployment/config/properties/java_util_HashSet'
+}

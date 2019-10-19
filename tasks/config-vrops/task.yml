@@ -11,6 +11,7 @@ params:
   VROPS_USER:
   VROPS_PASS:
   VROPS_NTP:
+  VROPS_LICENSE:
 
 inputs:
   - name: vops-suite-ci-pipeline
