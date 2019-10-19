@@ -12,7 +12,8 @@ getThumbprint() {
 ####################################################
 # configCluster
 configCluster() {
-	curl -ski -X POST \
+	responseConfigCode=$(curl -ski -X POST \
+		--write-out %{http_code} --output /dev/null \
 		-H "Accept: application/json;charset=UTF-8" \
 		-H "Content-Type: application/json;charset=UTF-8" \
 		-d '{
@@ -27,7 +28,9 @@ configCluster() {
                 "init" : true,
                 "dry-run" : false
                 }' \
-	'https://'$VROPS_IP'/casa/cluster'
+	'https://'$VROPS_IP'/casa/cluster')
+	if [ $responseConfigCode -eq 500 ] ; then
+		echo $responseConfigCode
 }
 ####################################################
 # getClusterStatus
