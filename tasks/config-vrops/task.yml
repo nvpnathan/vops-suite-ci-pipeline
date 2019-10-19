@@ -12,6 +12,9 @@ params:
   VROPS_PASS:
   VROPS_NTP:
   VROPS_LICENSE:
+  GOVC_URL:
+  GOVC_USERNAME:
+  GOVC_PASSWORD:
 
 inputs:
   - name: vops-suite-ci-pipeline

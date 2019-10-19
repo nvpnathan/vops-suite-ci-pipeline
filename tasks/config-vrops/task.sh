@@ -30,5 +30,13 @@ echo ""
 assignLicense
 echo ""
 echo "License Assigned"
+####################################################
 echo ""
 removeWizard
+echo ""
+####################################################
+echo "Conigure vCenter Adapter"
+configureVCadapter
+echo ""
+echo "Finished vCenter Adapter Configuration"
+####################################################

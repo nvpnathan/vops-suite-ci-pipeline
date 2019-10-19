@@ -28,7 +28,7 @@ vrops_ip_policy: fixedPolicy    # fixedPolicy | DHCP
 vrops_name: vlab-vrops-01       # VM Name
 vrops_network: vlab-mgmt        # VDS|VSS VM portgroup
 vrops_gateway: 192.168.64.1
-vrops_domain_name: vlab-vrops
+vrops_domain_name: vlab-vrops.vballin.com
 vrops_domain_search: vballin.com
 vrops_dns_server: 192.168.64.60
 vrops_ip_address: 192.168.64.50

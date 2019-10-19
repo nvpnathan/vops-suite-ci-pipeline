@@ -106,3 +106,46 @@ removeWizard() {
 	-d	'{"keyValues": [ { "key": "configurationWizardFirstConfigDone", "values": ["true"] } ] }' \
 	'https://'$VROPS_IP'/suite-api/internal/deployment/config/properties/java_util_HashSet'
 }
+####################################################
+configureVCadapter() {
+	curl -ski -X POST \
+	-H 'Content-Type: application/json;charset=UTF-8' \
+	-H 'Authorization: vRealizeOpsToken '$VROPS_BEARER_TOKEN'' \
+	-H 'Accept: application/json' \
+	-d	'{
+			"name" : "VC Adapter Instance",
+			"description" : "A vCenter Adapter Instance",
+			"collectorId" : "1",
+			"adapterKindKey" : "VMWARE",
+			"resourceIdentifiers" : [ {
+				"name" : "AUTODISCOVERY",
+				"value" : "true"
+			}, {
+				"name" : "PROCESSCHANGEEVENTS",
+				"value" : "true"
+			}, {
+				"name" : "VCURL",
+				"value" : "https://'$GOVC_URL'/sdk"
+			} ],
+			"credential" : {
+				"id" : null,
+				"name" : "New Principal Credential",
+				"adapterKindKey" : "VMWARE",
+				"credentialKindKey" : "PRINCIPALCREDENTIAL",
+				"fields" : [ {
+				"name" : "USER",
+				"value" : "'$GOVC_USERNAME'"
+				}, {
+				"name" : "PASSWORD",
+				"value" : "'$GOVC_PASSWORD'"
+				} ],
+				"others" : [ ],
+				"otherAttributes" : {
+				}
+			},
+			"others" : [ ],
+			"otherAttributes" : {
+			}
+		}' \
+	'https://'$VROPS_IP'/suite-api/api/adapters'
+}
