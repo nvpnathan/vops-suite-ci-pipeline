@@ -149,3 +149,20 @@ configureVCadapter() {
 		}' \
 	'https://'$VROPS_IP'/suite-api/api/adapters'
 }
+
+getVCadapterID() {
+	curl -ski -X GET \
+	-H 'Content-Type: application/json;charset=UTF-8' \
+	-H 'Authorization: vRealizeOpsToken '$VROPS_BEARER_TOKEN'' \
+	-H 'Accept: application/json' \
+	'https://'$VROPS_IP'/suite-api/api/adapters?adapterKindKey=VMWARE' \
+	| sed -n 's|.*"id":"\([^"]*\)".*|\1|p'
+}
+
+startVCadapter() {
+	curl -ski -X PUT \
+	-H 'Content-Type: application/json;charset=UTF-8' \
+	-H 'Authorization: vRealizeOpsToken '$VROPS_BEARER_TOKEN'' \
+	-H 'Accept: application/json' \
+	'https://'$VROPS_IP'/suite-api/api/adapters/'$VCADAPTER_ID'/monitoringstate/start'
+}

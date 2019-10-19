@@ -4,6 +4,7 @@ set -eu
 
 export ROOT_DIR=`pwd`
 source $ROOT_DIR/vops-suite-ci-pipeline/functions/vrops_functions.bash
+
 ####################################################
 ## waiting for vm to be ready
 echo "Waiting for VM to Power On"
@@ -23,6 +24,8 @@ configCluster
 ## monitor the cluster status
 waitForClusterFinish
 ####################################################
+## assign vrops license key
+echo "Assigning License Key"
 VROPS_BEARER_TOKEN=$(getToken)
 echo ""
 echo $VROPS_BEARER_TOKEN
@@ -31,12 +34,26 @@ assignLicense
 echo ""
 echo "License Assigned"
 ####################################################
+## remove initial wizard
 echo ""
 removeWizard
 echo ""
 ####################################################
 echo "Conigure vCenter Adapter"
+echo ""
 configureVCadapter
 echo ""
 echo "Finished vCenter Adapter Configuration"
+####################################################
+echo "Get vCenter Adapter ID"
+echo ""
+VCADAPTER_ID=$(getVCadapterID)
+echo ""
+echo $VCADAPTER_ID
+####################################################
+echo "Start VC Adapter Monitoring"
+echo ""
+startVCadapter
+echo ""
+echo "VC Adapter started"
 ####################################################
