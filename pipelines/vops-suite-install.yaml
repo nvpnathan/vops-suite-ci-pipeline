@@ -75,7 +75,7 @@ resources:
   type: git
   source:
     uri: https://github.com/nvpnathan/vops-suite-ci-pipeline.git
-    branch: master
+    branch: ((vops_suite_install_branch))
 
 - name: vrops-ova
   type: file-url
