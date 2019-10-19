@@ -46,13 +46,11 @@ echo ""
 echo "Finished vCenter Adapter Configuration"
 ####################################################
 echo "Get vCenter Adapter ID"
-echo ""
 VCADAPTER_ID=$(getVCadapterID)
 echo ""
 echo $VCADAPTER_ID
 ####################################################
 echo "Start VC Adapter Monitoring"
-echo ""
 startVCadapter
 echo ""
 echo "VC Adapter started"
