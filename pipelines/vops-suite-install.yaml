@@ -1,3 +1,68 @@
+vrop-deploy-params: &vrop-deploy-params
+  GOVC_INSECURE: ((vcenter_insecure))
+  GOVC_CA_CERT: ((vcenter_ca_cert))
+  GOVC_URL: ((vcenter_host))
+  GOVC_USERNAME: ((vcenter_usr))
+  GOVC_PASSWORD: ((vcenter_pwd))
+  GOVC_DATACENTER: ((vcenter_data_center))
+  GOVC_DATASTORE: ((vrops_datastore))
+  GOVC_RESOURCE_POOL: ((vrops_resource_pool))
+  VROPS_DEPLOYMENT_SIZE: ((vrops_deploy_size))
+  VROPS_DISK_PROVISION: ((vrops_disk_provision))
+  VROPS_IP_POLICY: ((vrops_ip_policy))
+  VROPS_NAME: ((vrops_name))
+  VROPS_PORTGROUP: ((vrops_network))
+  VROPS_GATEWAY: ((vrops_gateway))
+  VROPS_DOMAIN_NAME: ((vrops_domain_name))
+  VROPS_SEARCH_PATH: ((vrops_domain_search))
+  VROPS_DNS_SERVER: ((vrops_dns_server))
+  VROPS_IP: ((vrops_ip_address))
+  VROPS_NETMASK: ((vrops_netmask))
+  #VROPS_VM_FOLDER: ((vrops_vm_folder))
+  VROPS_POWER_ON: ((vrops_power_on))
+  VROPS_INDEX: ((vrops_product))
+  VROPS_OVA: ((vrops_ova_file_name))
+
+vrops-config-params: &vrops-config-params
+  VROPS_IP: ((vrops_ip_address))
+  VROPS_USER: ((vrops_username))
+  VROPS_PASS: ((vrops_password))
+  VROPS_NTP: ((vrops_ntp))
+
+vlog-deploy-params: &vlog-deploy-params
+  GOVC_INSECURE: ((vcenter_insecure))
+  GOVC_CA_CERT: ((vcenter_ca_cert))
+  GOVC_URL: ((vcenter_host))
+  GOVC_USERNAME: ((vcenter_usr))
+  GOVC_PASSWORD: ((vcenter_pwd))
+  GOVC_DATACENTER: ((vcenter_data_center))
+  GOVC_DATASTORE: ((vlog_datastore))
+  GOVC_RESOURCE_POOL: ((vlog_resource_pool))
+  VLOG_DEPLOYMENT_SIZE: ((vlog_deploy_size))
+  VLOG_DISK_PROVISION: ((vlog_disk_provision))
+  VLOG_IP_POLICY: ((vlog_ip_policy))
+  VLOG_VM_NAME: ((vlog_vm_name))
+  VLOG_PORTGROUP: ((vlog_network))
+  VLOG_GATEWAY: ((vlog_gateway))
+  VLOG_DOMAIN: ((vlog_domain))
+  VLOG_DOMAIN_NAME: ((vlog_domain_name))
+  VLOG_SEARCH_PATH: ((vlog_domain_search))
+  VLOG_DNS_SERVER: ((vlog_dns_server))
+  VLOG_IP: ((vlog_ip_address))
+  VLOG_NETMASK: ((vlog_netmask))
+  VLOG_ROOT_PW: ((vlog_root_pw))
+  #VLOG_VM_FOLDER: ((vlog_vm_folder))
+  VLOG_POWER_ON: ((vlog_power_on))
+  VLOG_INDEX: ((vlog_product))
+  VLOG_OVA: ((vlog_ova_file_name))
+
+vlog-config-params: &vlog-config-params
+  VLOG_IP: ((vlog_ip_address))
+  VLOG_USER: ((vlog_username))
+  VLOG_PASS: ((vlog_password))
+  VLOG_EMAIL: ((vlog_email))
+  VLOG_LICENSE: ((vlog_license_key))
+
 resource_types:
 - name: file-url
   type: docker-image
@@ -36,29 +101,19 @@ jobs:
   
   - task: deploy
     file: vops-suite-ci-pipeline/tasks/import-vrops/task.yml
-    params:
-      GOVC_INSECURE: ((vcenter_insecure))
-      GOVC_CA_CERT: ((vcenter_ca_cert))
-      GOVC_URL: ((vcenter_host))
-      GOVC_USERNAME: ((vcenter_usr))
-      GOVC_PASSWORD: ((vcenter_pwd))
-      GOVC_DATACENTER: ((vcenter_data_center))
-      GOVC_DATASTORE: ((vrops_datastore))
-      GOVC_RESOURCE_POOL: ((vrops_resource_pool))
-      VROPS_DEPLOYMENT_SIZE: ((vrops_deploy_size))
-      VROPS_DISK_PROVISION: ((vrops_disk_provision))
-      VROPS_IP_POLICY: ((vrops_ip_policy))
-      VROPS_NAME: ((vrops_name))
-      VROPS_PORTGROUP: ((vrops_network))
-      VROPS_GATEWAY: ((vrops_gateway))
-      VROPS_DOMAIN_NAME: ((vrops_domain_name))
-      VROPS_SEARCH_PATH: ((vrops_domain_search))
-      VROPS_DNS_SERVER: ((vrops_dns_server))
-      VROPS_IP: ((vrops_ip_address))
-      VROPS_NETMASK: ((vrops_netmask))
-      #VROPS_VM_FOLDER: ((vrops_vm_folder))
-      VROPS_POWER_ON: ((vrops_power_on))
-      ova_file_name_int: ((vrops_ova_file_name))
+    params: *vrop-deploy-params
+
+- name: configure-vrops
+  plan:
+  - in_parallel:
+    - get: vops-suite-ci-pipeline
+      params: {globs: []}
+      passed: [deploy-vrops]
+      trigger: true
+
+  - task: config-vrops-deployment
+    file: vops-suite-ci-pipeline/tasks/config-vrops/task.yml
+    params: *vrops-config-params
 
 - name: deploy-vlog-insight
   plan:
@@ -68,31 +123,7 @@ jobs:
   
   - task: deploy
     file: vops-suite-ci-pipeline/tasks/import-vlog/task.yml
-    params:
-      GOVC_INSECURE: ((vcenter_insecure))
-      GOVC_CA_CERT: ((vcenter_ca_cert))
-      GOVC_URL: ((vcenter_host))
-      GOVC_USERNAME: ((vcenter_usr))
-      GOVC_PASSWORD: ((vcenter_pwd))
-      GOVC_DATACENTER: ((vcenter_data_center))
-      GOVC_DATASTORE: ((vlog_datastore))
-      GOVC_RESOURCE_POOL: ((vlog_resource_pool))
-      VLOG_DEPLOYMENT_SIZE: ((vlog_deploy_size))
-      VLOG_DISK_PROVISION: ((vlog_disk_provision))
-      VLOG_IP_POLICY: ((vlog_ip_policy))
-      VLOG_VM_NAME: ((vlog_vm_name))
-      VLOG_PORTGROUP: ((vlog_network))
-      VLOG_GATEWAY: ((vlog_gateway))
-      VLOG_DOMAIN: ((vlog_domain))
-      VLOG_DOMAIN_NAME: ((vlog_domain_name))
-      VLOG_SEARCH_PATH: ((vlog_domain_search))
-      VLOG_DNS_SERVER: ((vlog_dns_server))
-      VLOG_IP: ((vlog_ip_address))
-      VLOG_NETMASK: ((vlog_netmask))
-      VLOG_ROOT_PW: ((vlog_root_pw))
-      #VLOG_VM_FOLDER: ((vlog_vm_folder))
-      VLOG_POWER_ON: ((vlog_power_on))
-      ova_file_name_int: ((vlog_ova_file_name))
+    params: *vlog-deploy-params
 
 - name: configure-vlog
   plan:
@@ -104,9 +135,4 @@ jobs:
 
   - task: config-vlog-deployment
     file: vops-suite-ci-pipeline/tasks/config-vlog/task.yml
-    params:
-        VLOG_IP: ((vlog_ip_address))
-        VLOG_USER: ((vlog_username))
-        VLOG_PASS: ((vlog_password))
-        VLOG_EMAIL: ((vlog_email))
-        VLOG_LICENSE: ((vlog_license_key))
+    params: *vlog-config-params
