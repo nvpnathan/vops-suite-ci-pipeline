@@ -39,7 +39,7 @@ vrops_power_on: true
 ## vrops configuration
 vrops_username: admin
 vrops_password: ((vlog_password))
-vrops_ntp: 0.us.pool.ntp.org
+vrops_ntp: pool.ntp.org
 vrops_license_key: ((vrops_key))
 
 ## vlog-insight ova settings
