@@ -1,4 +1,4 @@
-vops_suite_install_branch: master # use local_ova to use local nginx server with OVA's locally
+vops_suite_install_branch: local_ova # use local_ova to use local nginx server with OVA's locally
 
 ## myvmware.com
 myvmw_user: ((myvmware_user))
@@ -6,9 +6,9 @@ myvmw_pass: ((myvmware_pass))
 
 ## webserver | ova filename
 ova_webserver: "http://nginx"
-vrops_product: vmware-vrealize-operations
+vrops_product: vmware-vrealize-operations ## DO NOT MODIFY
 vrops_ova_file_name: "vRealize-Operations-Manager-Appliance-7.5.0.13165949_OVF10.ova"
-vlog_product: vmware-vrealize-log-insight
+vlog_product: vmware-vrealize-log-insight ## DO NOT MODIFY
 vlog_ova_file_name: "VMware-vRealize-Log-Insight-4.8.0-13036238_OVF10.ova"
 
 ## vcenter settings
@@ -28,13 +28,19 @@ vrops_ip_policy: fixedPolicy    # fixedPolicy | DHCP
 vrops_name: vlab-vrops-01       # VM Name
 vrops_network: vlab-mgmt        # VDS|VSS VM portgroup
 vrops_gateway: 192.168.64.1
-vrops_domain_name: vlab-vrops
+vrops_domain_name: vlab-vrops.vballin.com
 vrops_domain_search: vballin.com
 vrops_dns_server: 192.168.64.60
 vrops_ip_address: 192.168.64.50
 vrops_netmask: 255.255.255.0
 vrops_power_on: true
 #vrops_vm_folder:
+
+## vrops configuration
+vrops_username: admin
+vrops_password: ((vlog_password))
+vrops_ntp: 0.us.pool.ntp.org
+vrops_license_key: ((vrops_key))
 
 ## vlog-insight ova settings
 vlog_datastore: vlab-nfs-ds-01
