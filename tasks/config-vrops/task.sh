@@ -4,7 +4,6 @@ set -eu
 
 export ROOT_DIR=`pwd`
 source $ROOT_DIR/vops-suite-ci-pipeline/functions/vrops_functions.bash
-
 ####################################################
 ## waiting for vm to be ready
 echo "Waiting for VM to Power On"
@@ -41,7 +40,7 @@ echo ""
 ####################################################
 echo "Conigure vCenter Adapter"
 echo ""
-configureVCadapter
+configVCadapter
 echo ""
 echo "Finished vCenter Adapter Configuration"
 ####################################################
@@ -50,6 +49,7 @@ VCADAPTER_ID=$(getVCadapterID)
 echo ""
 echo $VCADAPTER_ID
 ####################################################
+## this will only work if your vCenter certificate is valid/trusted
 echo "Start VC Adapter Monitoring"
 startVCadapter
 echo ""

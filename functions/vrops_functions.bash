@@ -108,7 +108,7 @@ removeWizard() {
 }
 ####################################################
 # Configure vCenter Adapter for Monitoring
-configureVCadapter() {
+configVCadapter() {
 	curl -ski -X POST \
 	-H 'Content-Type: application/json;charset=UTF-8' \
 	-H 'Authorization: vRealizeOpsToken '$VROPS_BEARER_TOKEN'' \
