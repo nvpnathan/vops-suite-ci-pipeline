@@ -10,9 +10,28 @@ getThumbprint() {
 	fi
 }
 ####################################################
+# # configCluster
+# configCluster() {
+# 	curl -ski -X POST \
+# 		-H "Accept: application/json;charset=UTF-8" \
+# 		-H "Content-Type: application/json;charset=UTF-8" \
+# 		-d '{
+#                 "master" : {
+#                 "name" : "master-node",
+#                 "address" : "'$VROPS_IP'",
+#                 "thumbprint" : "'$VROPS_THUMBPRINT'"
+#                 },
+#                 "remoteCollector" : null,
+#                 "admin_password" : "'$VROPS_PASS'",
+#                 "ntp_servers" : [ "'$VROPS_NTP'" ],
+#                 "init" : true,
+#                 "dry-run" : false
+#                 }' \
+# 	'https://'$VROPS_IP'/casa/cluster'
+# }
 # configCluster
 configCluster() {
-	curl -ski -X POST \
+	config_Status=$(curl --write-out %{http_code} -ski -X POST \
 		-H "Accept: application/json;charset=UTF-8" \
 		-H "Content-Type: application/json;charset=UTF-8" \
 		-d '{
@@ -27,7 +46,14 @@ configCluster() {
                 "init" : true,
                 "dry-run" : false
                 }' \
-	'https://'$VROPS_IP'/casa/cluster'
+	'https://'$VROPS_IP'/casa/cluster')
+	if [ $config_Status -eq 200 ] ; then
+		echo ""
+		echo "Succesfully configured Cluster"
+	else
+		echo $config_Status
+		exit 1
+	fi
 }
 ####################################################
 # getClusterStatus
