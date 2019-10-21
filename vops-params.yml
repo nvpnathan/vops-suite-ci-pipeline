@@ -1,4 +1,4 @@
-vops_suite_install_branch: local_ova # use local_ova to use local nginx server with OVA's locally
+vops_suite_install_branch: master # use local_ova to use local nginx server with OVA's locally
 
 ## myvmware.com
 myvmw_user: ((myvmware_user))
