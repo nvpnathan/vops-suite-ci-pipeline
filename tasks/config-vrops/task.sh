@@ -20,7 +20,7 @@ echo ""
 ####################################################
 ## configure vrops cluster
 configCluster
-## monitor the cluster status
+## wait for cluster finish
 waitForClusterFinish
 ####################################################
 ## assign vrops license key
