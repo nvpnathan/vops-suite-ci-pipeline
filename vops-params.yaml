@@ -7,9 +7,9 @@ myvmw_pass: ((myvmware_pass))
 ## webserver | ova filename
 ova_webserver: "http://nginx"
 vrops_product: vmware-vrealize-operations ## DO NOT MODIFY
-vrops_ova_file_name: "vRealize-Operations-Manager-Appliance-7.5.0.13165949_OVF10.ova"
+vrops_ova_file_name: "vRealize-Operations-Manager-Appliance-8.0.0.14857692_OVF10.ova"
 vlog_product: vmware-vrealize-log-insight ## DO NOT MODIFY
-vlog_ova_file_name: "VMware-vRealize-Log-Insight-4.8.0-13036238_OVF10.ova"
+vlog_ova_file_name: "VMware-vRealize-Log-Insight-8.0.0.0-14870409_OVF10.ova "
 
 ## vcenter settings
 vcenter_insecure: 1
