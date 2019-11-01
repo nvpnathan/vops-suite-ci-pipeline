@@ -10,6 +10,7 @@ echo "Waiting for VM to Power On"
 while [[ "$(curl -ski -o /dev/null -w ''%{http_code}'' https://$VROPS_IP/casa/node/thumbprint)" != "200" ]];
   do printf '.' sleep 10;
 done
+sleep 60
 ####################################################
 ## get vrops thumbprint
 echo "Retrieving thumbprint"
