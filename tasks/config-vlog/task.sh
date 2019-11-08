@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set +x
 
 export ROOT_DIR=`pwd`
 source $ROOT_DIR/vops-suite-ci-pipeline/functions/li_functions.bash
