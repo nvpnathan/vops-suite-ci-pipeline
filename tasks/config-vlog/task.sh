@@ -12,6 +12,8 @@ while [[ "$(curl -ski -o /dev/null -w ''%{http_code}'' https://$VLOG_IP/admin/st
   do printf '.' sleep 10;
 done
 
+sleep 60
+
 echo "Configure New Deployment"
 liapi $VLOG_IP POST deployment/new '{"user": {"userName": "'"$VLOG_USER"'", "password": "'"$VLOG_PASS"'", "email": "'"$VLOG_EMAIL"'"}}'
 
