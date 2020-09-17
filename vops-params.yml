@@ -1,4 +1,4 @@
-vops_suite_install_branch: local_ova # use local_ova to use local nginx server with OVA's locally
+vops_suite_install_branch: local_ova #master # use local_ova to use local nginx server with OVA's locally
 
 ## myvmware.com
 myvmw_user: ((myvmware_user))
@@ -7,9 +7,9 @@ myvmw_pass: ((myvmware_pass))
 ## webserver | ova filename
 ova_webserver: "http://nginx"
 vrops_product: vmware-vrealize-operations ## DO NOT MODIFY
-vrops_ova_file_name: "vRealize-Operations-Manager-Appliance-7.5.0.13165949_OVF10.ova"
+vrops_ova_file_name: "vRealize-Operations-Manager-Appliance-8.1.1.16522874_OVF10.ova"
 vlog_product: vmware-vrealize-log-insight ## DO NOT MODIFY
-vlog_ova_file_name: "VMware-vRealize-Log-Insight-4.8.0-13036238_OVF10.ova"
+vlog_ova_file_name: "VMware-vRealize-Log-Insight-8.1.1.0-16281169_OVF10.ova"
 
 ## vcenter settings
 vcenter_insecure: 1
@@ -17,16 +17,16 @@ vcenter_ca_cert:
 vcenter_host: vlab-vcsa.vballin.com
 vcenter_usr: administrator@vsphere.local
 vcenter_pwd: ((vcenter-pass))
-vcenter_data_center: vlab-dc
+vcenter_data_center: pl-dc
 
 ## vrops ova settings
-vrops_datastore: vlab-nfs-ds-01
-vrops_resource_pool: /vlab-dc/host/vlab-mgmt-edge/Resources # /<vSphere-Datcenter/host/<vSphere-Cluster>/Resources/<vSphere-ResourcePool>
+vrops_datastore: nfs-01
+vrops_resource_pool: /pl-dc/host/pl-vlab-mgmt/Resources # /<vSphere-Datcenter/host/<vSphere-Cluster>/Resources/<vSphere-ResourcePool>
 vrops_deploy_size: xsmall       # xsmall | small | medium | large | xlarge
 vrops_disk_provision: thin      # thin | thick
 vrops_ip_policy: fixedPolicy    # fixedPolicy | DHCP
 vrops_name: vlab-vrops-01       # VM Name
-vrops_network: vlab-mgmt        # VDS|VSS VM portgroup
+vrops_network: pl-vlab-mgmt       # VDS|VSS VM portgroup
 vrops_gateway: 192.168.64.1
 vrops_domain_name: vlab-vrops.vballin.com
 vrops_domain_search: vballin.com
@@ -39,17 +39,17 @@ vrops_power_on: true
 ## vrops configuration
 vrops_username: admin
 vrops_password: ((vlog_password))
-vrops_ntp: 0.us.pool.ntp.org
+vrops_ntp: pool.ntp.org
 vrops_license_key: ((vrops_key))
 
 ## vlog-insight ova settings
-vlog_datastore: vlab-nfs-ds-01
-vlog_resource_pool: /vlab-dc/host/vlab-mgmt-edge/Resources # /<vSphere-Datcenter/host/<vSphere-Cluster>/Resources/<vSphere-ResourcePool>
+vlog_datastore: nfs-01
+vlog_resource_pool: /pl-dc/host/pl-vlab-mgmt/Resources # /<vSphere-Datcenter/host/<vSphere-Cluster>/Resources/<vSphere-ResourcePool>
 vlog_deploy_size: xsmall          # xsmall | small | medium | large
 vlog_disk_provision: thin         # thin | thick
 vlog_ip_policy: fixedPolicy       # fixedPolicy | DHCP
 vlog_vm_name: vlab-loginsight-01  # VM Name
-vlog_network: vlab-mgmt           # VDS|VSS VM portgroup
+vlog_network: pl-vlab-mgmt         # VDS|VSS VM portgroup
 vlog_gateway: 192.168.64.1
 vlog_domain: vballin.com
 vlog_domain_name: vlab-loginsight
